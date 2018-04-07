@@ -20,4 +20,21 @@ VIEW `v_allownedmovies` AS
 select * from v_allownedmovies;
 
 
+-- 2
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_allhorrormovies` AS
+    SELECT 
+        `movie`.`title` AS `title`
+    FROM
+        `movie`
+    WHERE
+        (`movie`.`genre` = 'Skräck');
+				
+select * from v_allhorrormovies;
+				
+				
 				
