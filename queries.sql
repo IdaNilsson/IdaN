@@ -14,7 +14,10 @@ VIEW `v_allownedmovies` AS
         `movie`.`releaseYear` AS `releaseYear`,
         `movie`.`isLeased` AS `isLeased`
     FROM
-        `movie`
+        `movie`;
 
 
 select * from v_allownedmovies;
+
+
+				
