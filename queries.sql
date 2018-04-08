@@ -166,6 +166,29 @@ where m.id = p_movieId;
 END;
 
 call sp_setMovieStatusIsLeasedToFalse (1, 1);
+
+
+-- 10
+
+CREATE DEFINER=`root`@`localhost` TRIGGER `idan`.`statistics_AFTER_INSERT` AFTER INSERT ON `rentinfo` FOR EACH ROW
+BEGIN
+
+declare startDate date;
+declare endDate date;
+declare movieTitle varchar(45);
+declare isLeased tinyint;
+
+select ri.startDate, ri.endDate, m.title, m.isLeased
+into startDate, endDate, movieTitle, isLeased
+from rentinfo ri
+join movie m on (ri.movieId = m.id)
+where ri.id = new.id;
+
+insert into statistics (movieTitle, rentalDate)
+values (movieTitle, startDate);
+END;
+
+select * from statistics;
 		
 
 						
