@@ -119,6 +119,19 @@ VIEW `v_statisticsoflastmonthtop5rentedmovies` AS
     LIMIT 5;
 		
 select * from v_statisticsoflastmonthtop5rentedmovies;
+
+
+-- 7
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setMovieStatusToIsLeased`(
+p_employeeId int, p_customerId int, p_movieId int)
+BEGIN
+insert into rentinfo (startDate, employeeId, customerId, movieId) values (curdate(), p_employeeId, p_customerId, p_movieId);
+update movie set isLeased = 1
+where id = p_movieId;
+END;
+
+call sp_setMovieStatusToIsLeased (2, 9, 8);
 		
 
 						
