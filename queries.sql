@@ -151,6 +151,21 @@ end if;
 END;
 
 select isLeased(8) isLeased;
+
+
+-- 9
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setMovieStatusIsLeasedToFalse`(
+ p_customerId int, p_movieId int)
+BEGIN
+update rentinfo ri
+join movie m on (ri.movieId = m.id)
+set ri.endDate = curdate(),
+m.isLeased = 0
+where m.id = p_movieId;
+END;
+
+call sp_setMovieStatusIsLeasedToFalse (1, 1);
 		
 
 						
