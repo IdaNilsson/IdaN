@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `idan` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_swedish_ci */;
+USE `idan`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: idan
@@ -14,9 +16,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-CREATE DATABASE idan;
-USE idan;
 
 --
 -- Table structure for table `customer`
@@ -98,7 +97,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (1,'Öde Stugan','Skräck','Beda Holmberg','Maurits Westin',2017,1),(2,'Djupt vatten','Skräck','Märit Jernberg','	Justina Engblom',1979,1),(3,'Förevigt','Romantik','Sara Lindholm','Hardy Lidman',2001,1),(4,'Solsken','Romantik','Elise Lindstrand','Florence Björnsson',2005,1),(5,'En sprucken läpp','Drama','	Valborg Vikman','Vivi-Ann Ledin',1999,1),(6,'Lågt i tak','Drama','Carina Andersen','Henrik Söderholm',1989,1),(7,'Stefan Löfvens affär','Action','Stefan Löfven','Henrik Leijon',2018,1),(8,'Carl XVI Gustafs äventyr','Action','Carl XVI Gustaf','Ingegerd Ingemarsson',2010,1),(9,'Soldaten','Komedi','Lucia Sundgren','Serafia Ekman',1954,0),(10,'Mister Ärta','Komedi','Thomas Hedman','Hulda Collin',1992,0),(11,'Carl XVI Gustafs äventyr','Action','Beda Carl XVI Gustaf','Ingegerd Ingemarsson',2010,1);
+INSERT INTO `movie` VALUES (1,'Öde Stugan','Skräck','Beda Holmberg','Maurits Westin',2017,1),(2,'Djupt vatten','Skräck','Märit Jernberg','	Justina Engblom',1979,1),(3,'Förevigt','Romantik','Sara Lindholm','Hardy Lidman',2001,1),(4,'Solsken','Romantik','Elise Lindstrand','Florence Björnsson',2005,1),(5,'En sprucken läpp','Drama','	Valborg Vikman','Vivi-Ann Ledin',1999,1),(6,'Lågt i tak','Drama','Carina Andersen','Henrik Söderholm',1989,1),(7,'Stefan Löfvens affär','Action','Stefan Löfven','Henrik Leijon',2018,1),(8,'Carl XVI Gustafs äventyr','Action','Carl XVI Gustaf','Ingegerd Ingemarsson',2010,0),(9,'Soldaten','Komedi','Lucia Sundgren','Serafia Ekman',1954,0),(10,'Mister Ärta','Komedi','Thomas Hedman','Hulda Collin',1992,0),(11,'Carl XVI Gustafs äventyr','Action','Carl XVI Gustaf','Ingegerd Ingemarsson',2010,0);
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,10 +119,10 @@ CREATE TABLE `rentinfo` (
   KEY `empolyeeId_idx` (`employeeId`),
   KEY `customerId_idx` (`customerId`),
   KEY `movieId_idx` (`movieId`),
-  CONSTRAINT `customerId` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `empolyeeId` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `movieId` FOREIGN KEY (`movieId`) REFERENCES `movie` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+  CONSTRAINT `customerId` FOREIGN KEY (`customerId`) REFERENCES `customer` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `empolyeeId` FOREIGN KEY (`employeeId`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `movieId` FOREIGN KEY (`movieId`) REFERENCES `movie` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +131,7 @@ CREATE TABLE `rentinfo` (
 
 LOCK TABLES `rentinfo` WRITE;
 /*!40000 ALTER TABLE `rentinfo` DISABLE KEYS */;
-INSERT INTO `rentinfo` VALUES (1,'2018-01-01','2018-01-04',1,1,1),(2,'2018-01-01','2018-01-05',2,2,2),(3,'2018-01-01','2018-01-06',3,3,3),(4,'2018-01-06','2018-01-10',4,4,4),(5,'2018-01-06','2018-01-10',1,5,5),(6,'2018-01-10','2018-01-13',2,6,6),(7,'2018-01-14','2018-01-17',1,7,7),(8,'2018-01-17','2018-01-25',1,8,8),(9,'2018-01-01','2018-01-04',1,1,11);
+INSERT INTO `rentinfo` VALUES (60,'2018-03-01','2018-03-03',1,1,1),(61,'2018-03-01','2018-03-03',1,2,2),(62,'2018-03-01','2018-03-03',2,3,3),(63,'2018-03-01','2018-03-03',2,4,4),(64,'2018-03-02','2018-03-05',3,5,5),(65,'2018-03-02','2018-04-06',3,6,6),(66,'2018-03-02','2018-03-05',4,7,7),(67,'2018-03-02','2018-03-05',4,8,8),(68,'2018-03-06','2018-03-10',1,6,1),(69,'2018-03-11','2018-03-13',2,7,1),(70,'2018-03-14','2018-03-17',1,8,1),(71,'2018-04-05',NULL,1,1,1),(72,'2018-04-05',NULL,1,2,2),(73,'2018-04-05',NULL,2,3,3),(75,'2018-04-05',NULL,2,4,4),(76,'2018-04-01',NULL,1,5,5),(77,'2018-04-06','2018-04-06',3,6,6),(78,'2018-04-06',NULL,4,7,7),(79,'2018-04-07',NULL,2,8,6);
 /*!40000 ALTER TABLE `rentinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,11 +143,11 @@ DROP TABLE IF EXISTS `statistics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `statistics` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `movieTitle` varchar(45) COLLATE utf8mb4_swedish_ci DEFAULT NULL,
   `rentalDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_swedish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,8 +156,87 @@ CREATE TABLE `statistics` (
 
 LOCK TABLES `statistics` WRITE;
 /*!40000 ALTER TABLE `statistics` DISABLE KEYS */;
+INSERT INTO `statistics` VALUES (4,'Öde Stugan','2018-03-01'),(5,'Djupt vatten','2018-03-01'),(6,'Förevigt','2018-03-01'),(7,'Solsken','2018-03-01'),(8,'En sprucken läpp','2018-03-02'),(9,'Lågt i tak','2018-03-02'),(10,'Stefan Löfvens affär','2018-03-02'),(11,'Carl XVI Gustafs äventyr','2018-03-02'),(12,'Öde Stugan','2018-03-06'),(13,'Öde Stugan','2018-03-11'),(14,'Öde Stugan','2018-03-14'),(15,'Öde Stugan','2018-04-05'),(16,'Djupt vatten','2018-04-05'),(17,'Förevigt','2018-04-05'),(19,'Solsken','2018-04-05'),(20,'En sprucken läpp','2018-04-01'),(21,'Lågt i tak','2018-04-06'),(22,'Stefan Löfvens affär','2018-04-06'),(23,'Lågt i tak','2018-04-07');
 /*!40000 ALTER TABLE `statistics` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'idan'
+--
+/*!50003 DROP FUNCTION IF EXISTS `isLeased` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `isLeased`(f_id int) RETURNS tinyint(4)
+BEGIN
+declare isLeased tinyint(4);
+
+select m.isLeased into isLeased from movie m
+where m.id = f_id;
+if isLeased = 0
+then
+return 0;
+else
+return 1;
+end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_setMovieStatusIsLeasedToFalse` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setMovieStatusIsLeasedToFalse`(
+ p_customerId int, p_movieId int)
+BEGIN
+update rentinfo ri
+join movie m on (ri.movieId = m.id)
+set ri.endDate = curdate(),
+m.isLeased = 0
+where m.id = p_movieId;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `sp_setMovieStatusToIsLeased` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setMovieStatusToIsLeased`(
+p_employeeId int, p_customerId int, p_movieId int)
+BEGIN
+insert into rentinfo (startDate, employeeId, customerId, movieId) values (curdate(), p_employeeId, p_customerId, p_movieId);
+update movie set isLeased = 1
+where id = p_movieId;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -169,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-02 14:26:09
+-- Dump completed on 2018-04-08 11:55:14
