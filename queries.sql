@@ -37,4 +37,24 @@ VIEW `v_allhorrormovies` AS
 select * from v_allhorrormovies;
 				
 				
-				
+-- 3	
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_allrentedmovies` AS
+    SELECT 
+        CONCAT(`c`.`firstName`, ' ', `c`.`lastName`) AS `customer`,
+        CONCAT(`e`.`firstName`, ' ', `e`.`lastName`) AS `employee`,
+        `m`.`title` AS `movieTitle`
+    FROM
+        (((`rentinfo` `ri`
+        JOIN `customer` `c` ON ((`ri`.`customerId` = `c`.`id`)))
+        JOIN `employee` `e` ON ((`ri`.`employeeId` = `e`.`id`)))
+        JOIN `movie` `m` ON ((`ri`.`movieId` = `m`.`id`)))
+    WHERE
+        ((`m`.`isLeased` = 1)
+            AND ISNULL(`ri`.`endDate`));	
+						
+select * from v_allrentedmovies;
