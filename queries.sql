@@ -79,4 +79,24 @@ VIEW `v_delayedreturn` AS
             AND ISNULL(`ri`.`endDate`));
 						
 select * from v_delayedreturn;
+
+
+-- 5
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_norentedmoviesperemployee` AS
+    SELECT 
+        CONCAT(`e`.`firstName`, ' ', `e`.`lastName`) AS `employee`,
+        COUNT(`ri`.`employeeId`) AS `totalLeasedMovies`
+    FROM
+        (`employee` `e`
+        LEFT JOIN `rentinfo` `ri` ON ((`ri`.`employeeId` = `e`.`id`)))
+    GROUP BY `ri`.`employeeId`;
+		
+select * from v_norentedmoviesperemployee;
+		
+
 						
