@@ -58,3 +58,25 @@ VIEW `v_allrentedmovies` AS
             AND ISNULL(`ri`.`endDate`));	
 						
 select * from v_allrentedmovies;
+
+
+-- 4
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_delayedreturn` AS
+    SELECT 
+        `m`.`title` AS `movieTitle`,
+        CONCAT(`c`.`firstName`, ' ', `c`.`lastName`) AS `customer`
+    FROM
+        ((`rentinfo` `ri`
+        JOIN `customer` `c` ON ((`ri`.`customerId` = `c`.`id`)))
+        JOIN `movie` `m` ON ((`ri`.`movieId` = `m`.`id`)))
+    WHERE
+        (((CURDATE() - `ri`.`startDate`) >= 4)
+            AND ISNULL(`ri`.`endDate`));
+						
+select * from v_delayedreturn;
+						
