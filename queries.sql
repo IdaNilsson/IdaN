@@ -132,6 +132,25 @@ where id = p_movieId;
 END;
 
 call sp_setMovieStatusToIsLeased (2, 9, 8);
+
+
+-- 8
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `isLeased`(f_id int) RETURNS tinyint(4)
+BEGIN
+declare isLeased tinyint(4);
+
+select m.isLeased into isLeased from movie m
+where m.id = f_id;
+if isLeased = 0
+then
+return 0;
+else
+return 1;
+end if;
+END;
+
+select isLeased(8) isLeased;
 		
 
 						
