@@ -97,6 +97,28 @@ VIEW `v_norentedmoviesperemployee` AS
     GROUP BY `ri`.`employeeId`;
 		
 select * from v_norentedmoviesperemployee;
+
+
+-- 6
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_statisticsoflastmonthtop5rentedmovies` AS
+    SELECT 
+        COUNT(`statistics`.`movieTitle`) AS `noOfRentals`,
+        `statistics`.`movieTitle` AS `movieTitle`
+    FROM
+        `statistics`
+    WHERE
+        ((YEAR(`statistics`.`rentalDate`) = YEAR((CURDATE() - INTERVAL 1 MONTH)))
+            AND (MONTH(`statistics`.`rentalDate`) = MONTH((CURDATE() - INTERVAL 1 MONTH))))
+    GROUP BY `statistics`.`movieTitle`
+    ORDER BY COUNT(`statistics`.`movieTitle`) DESC
+    LIMIT 5;
+		
+select * from v_statisticsoflastmonthtop5rentedmovies;
 		
 
 						
